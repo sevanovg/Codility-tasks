@@ -1,0 +1,15 @@
+class Solution {
+    public int solution(int X, int Y, int D) {
+        int result = 0;
+        int distance = Y-X;
+        if (distance==0) {
+            result = 0;
+        }
+        if (distance % D != 0) {
+            result = distance/D + 1;
+        } else {
+            result = distance/D;
+        }
+        return result;
+    }
+}
