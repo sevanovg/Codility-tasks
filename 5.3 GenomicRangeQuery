@@ -1,0 +1,48 @@
+class Solution {
+    public int[] solution(String S, int[] P, int[] Q) {
+        int[] result = new int [P.length];
+        
+        int [] counterAs = new int [S.length()];
+        int [] counterCs = new int [S.length()];
+        int [] counterGs = new int [S.length()];
+        int [] counterTs = new int [S.length()];
+        
+        int counterA = 0;
+        int counterC = 0;
+        int counterG = 0;
+        int counterT = 0;
+        
+        for (int i = 0; i<S.length(); i++){
+            switch (S.charAt(i)){
+                case 'A': 
+                    counterA++;
+                    break;
+                case 'C': 
+                    counterC++;
+                    break;
+                case 'G': 
+                    counterG++;
+                    break;
+                case 'T': 
+                    counterT++; 
+                    break;
+            }
+            counterAs[i] = counterA;
+            counterCs[i] = counterC;
+            counterGs[i] = counterG;
+            counterTs[i] = counterT;            
+        }
+        for (int i = 0; i<P.length; i++){
+            if (counterAs[Q[i]]>counterAs[P[i]] || S.charAt(P[i])=='A') {
+                result[i] = 1;
+            } else if (counterCs[Q[i]]>counterCs[P[i]] || S.charAt(P[i])=='C') {
+                result[i] = 2;
+            } else if (counterGs[Q[i]]>counterGs[P[i]] || S.charAt(P[i])=='G') {
+                result[i] = 3;
+            } else {
+                result[i] = 4;
+            }
+        }
+        return result;
+    }
+}
