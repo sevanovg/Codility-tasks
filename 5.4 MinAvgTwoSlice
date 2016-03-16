@@ -1,0 +1,23 @@
+class Solution {
+    public int solution(int[] A) {
+        double avg2 = 0.0;
+        double avg3 = 0.0;
+        double avgMin = 0.0;
+        double currentMin = (double)(A[0] + A[1]) / 2;
+        int result = 0;
+        for (int i = 0; i<A.length-1; i++){
+            avg2 = (double)(A[i] + A[i+1]) / 2;
+            if (i<A.length - 2) {
+                avg3 = (double)(A[i] + A[i+1] + A[i+2]) /3;
+                avgMin = Math.min (avg2, avg3);
+            } else {
+                avgMin = avg2;
+            }
+            if (avgMin < currentMin) {
+                currentMin = avgMin;
+                result = i;
+            }
+        }
+        return result;
+    }
+}
