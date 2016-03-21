@@ -1,0 +1,50 @@
+		// you can also use imports, for example:
+import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        int counter = 0;
+        int substractor = 0;
+        int rank = 0;
+        int searchRes = 0;
+        int[][] X = new int [A.length][2];
+        int[] Y = new int [A.length];
+        for (int i = 0; i<A.length; i++){
+            X[i][0] = i-A[i];
+            X[i][1] = i+A[i];
+            Y[i] = i-A[i];
+        }
+        sortArray (X);
+        Arrays.sort (Y);
+        for (int i = 0; i<X.length; i++){
+            searchRes = Arrays.binarySearch(Y, X[i][1]);
+            if (searchRes<0){   
+                rank = -(searchRes+1);
+                counter += rank - i-1;
+            } else {
+                while (searchRes+1<Y.length && Y[searchRes+1]==Y[searchRes]){
+                searchRes++;
+                } 
+                rank = searchRes;
+                counter += rank - i;
+            }
+            if (counter>10000000){
+                return -1;
+            }
+        }
+        return counter;
+    }
+    
+    public static void sortArray(int myArray[][]) {
+    Arrays.sort(myArray, new Comparator<int[]>() {
+
+        @Override
+        public int compare(int[] o1, int[] o2) {
+            return Integer.valueOf(o1[0]).compareTo(Integer.valueOf(o2[0]));
+            }
+        });
+    }
+}
