@@ -6,13 +6,14 @@ class Solution {
         Deque<Integer> downstream = new ArrayDeque<Integer>();
         for (int i=0; i<A.length; i++){
             if (B[i]==0){
-                while (downstream.peekFirst() != null && downstream.getFirst()<A[i]){
-                    downstream.removeFirst();
-                    counter--;
-                }
-                if (downstream.peekFirst() == null){
-                    counter++;
-                }
+                try{
+                    while (downstream.getFirst()<A[i]){
+                        downstream.removeFirst();
+                        counter--;
+                        }
+                } catch (NoSuchElementException e){
+                        counter++;
+                    }               
             } else {
                 downstream.addFirst(A[i]);
                 counter++;
