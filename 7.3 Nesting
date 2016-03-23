@@ -1,0 +1,25 @@
+import java.util.*;
+
+class Solution {
+    public int solution(String S) {
+        Deque<Character> deque = new ArrayDeque<Character>();
+        for (int i=0; i<S.length(); i++){
+            if (S.charAt(i) == '(') {
+                deque.addLast(S.charAt(i));
+            } else {
+                try{
+                    if(deque.removeLast()=='('){
+                        continue;
+                    }
+                    return 0;
+                } catch (NoSuchElementException e){
+                    return 0;
+                }
+            }
+        }
+        if (deque.peekFirst()==null) {
+            return 1;
+        }
+        return 0;
+    }
+}
