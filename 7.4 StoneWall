@@ -1,0 +1,35 @@
+// you can also use imports, for example:
+import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] H) {
+        int counter = 0;
+        Deque <Integer> deque = new ArrayDeque <Integer>();
+        for (int i = 0, n = H.length; i < n; i++) {
+            if (i > 0 && H[i] == H [i-1]) {
+                continue; //do nothing if height doesn't change
+            }            
+            if (i == 0 || H[i] > H [i-1]) {
+                counter++; //if height increases - new block is necessary
+                deque.addFirst(Integer.valueOf(H[i])); //if height increases - store the previous height value in the deque
+            }
+            if (i > 0 && H[i] < H [i-1]) {
+                
+                // if height is in the deque then don't need new block
+                if (!deque.contains( Integer.valueOf( H[i] ) ) ){
+                    counter++;
+                }                
+                // cut all the values from the deque which are higher than current
+                while (deque.peekFirst() != null && deque.peekFirst() >= H[i]) {
+                    deque.pollFirst();
+                    continue;
+                }
+                deque.addFirst(Integer.valueOf(H[i]));
+            }      
+        }
+        return counter;
+    }
+}
