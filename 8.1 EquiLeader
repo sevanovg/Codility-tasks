@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] A) {
+        Deque <Integer> deque = new ArrayDeque <Integer> ();
+        int candidate = 0;
+        int leader = 0;
+        int candidateCounter = 0;
+        int leaderCounter = 0;
+        int rightLeaderCounter = 0;
+        int equiLeaders = 0;
+        
+        for (int i = 0, n =A.length; i<n; i++){
+            if (deque.size() == 0 || deque.peekFirst() == A[i]) {
+                deque.addFirst(A[i]);
+            } else {
+                deque.removeFirst();
+            }
+        }
+        if (deque.size()==0) {
+            return 0;
+        } else {
+            candidate = deque.peekFirst();
+            for (int i = 0, n = A.length; i<n; i++){
+                if (A[i] == candidate){
+                candidateCounter++;
+                }
+            }
+            if (candidateCounter > A.length/2) {
+                leader = candidate;
+            } else {
+                return 0;
+            }
+        }
+        for (int i = 0, n = A.length; i < n; i++) {
+            if (A[i] == leader) {
+                leaderCounter++;
+            }
+            rightLeaderCounter = candidateCounter - leaderCounter;
+            if (leaderCounter>(i+1)/2 && rightLeaderCounter > (n-i-1)/2) {
+               equiLeaders ++;
+            }
+        }
+        return equiLeaders;
+    }
+}
