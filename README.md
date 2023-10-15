@@ -1,2 +1,2 @@
 # Codility-tasks
-My own codility tasks solutions in Java
+My personal codility tasks solutions in Java
