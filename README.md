@@ -1,2 +1,2 @@
 # Codility-tasks
-Codility free programming tasks solutions in Java
+My own codility tasks solutions in Java
